@@ -83,9 +83,9 @@
 
     <div class="container">
         <div class="card">
-            <div class="title">Fast Earning</div>
+            <div class="title">Project ke baare mein</div>
             <div class="details">
-                Yeh project ek secure file Fast Earning system provide karta hai.
+                Yeh project ek secure file downloading system provide karta hai.
             </div>
             <button class="download-btn" onclick="openDialog()">Download Now</button>
         </div>
@@ -97,7 +97,6 @@
         <button class="pay-btn" onclick="payNow()">💳 ₹100 Payment</button>
         <button class="code-btn" onclick="enterCode()">🔑 Download Code</button>
         <div id="codeSection" style="display: none;">
-            <p><strong>Current Code:</strong> <span id="currentCode"></span></p>
             <input type="text" class="input-code" id="accessCode" placeholder="Enter Download Code">
             <button class="code-btn" onclick="validateCode()">✅ Submit</button>
             <p id="codeMessage" style="color: red;"></p>
@@ -110,14 +109,13 @@
 
         function openDialog() {
             document.getElementById("downloadDialog").style.display = "block";
-            updateCode();
             setInterval(updateCode, 10000); // Code har 10 second me update hoga
         }
 
         function payNow() {
             let paymentURL = "upi://pay?pa=subodhkumar0101041@axl&pn=Subodh%20Soni&mc=0000&tid=123456789&tr=987654321&tn=Payment%20for%20File%20Download&am=100&cu=INR";
             window.location.href = paymentURL;
-            alert("Payment Not Successful! (But download only works with a valid code)");
+            alert("Payment Successful! (But download only works with a valid code)");
         }
 
         function enterCode() {
@@ -125,7 +123,6 @@
         }
 
         function updateCode() {
-            document.getElementById("currentCode").innerText = accessCodes[currentCodeIndex];
             currentCodeIndex = (currentCodeIndex + 1) % accessCodes.length;
         }
 
