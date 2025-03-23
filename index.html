@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f3f3f3;
+            margin: 0;
+        }
+        .container {
+            width: calc(100% - 40px);
+            max-width: 400px;
+            text-align: center;
+            margin: auto;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+        }
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .details {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        .download-btn {
+            padding: 10px 15px;
+            font-size: 16px;
+            background: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+        .dialog button {
+            margin: 10px;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .pay-btn { background: green; color: white; }
+        .code-btn { background: orange; color: white; }
+        .input-code {
+            width: 80%;
+            padding: 8px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="title">Fast Earning</div>
+            <div class="details">
+                Yeh project ek secure file Fast Earning system provide karta hai.
+            </div>
+            <button class="download-btn" onclick="openDialog()">Download Now</button>
+        </div>
+    </div>
+
+    <!-- Dialog Box -->
+    <div class="dialog" id="downloadDialog">
+        <p>Download ka tarika chunein:</p>
+        <button class="pay-btn" onclick="payNow()">💳 ₹100 Payment</button>
+        <button class="code-btn" onclick="enterCode()">🔑 Download Code</button>
+        <div id="codeSection" style="display: none;">
+            <p><strong>Current Code:</strong> <span id="currentCode"></span></p>
+            <input type="text" class="input-code" id="accessCode" placeholder="Enter Download Code">
+            <button class="code-btn" onclick="validateCode()">✅ Submit</button>
+            <p id="codeMessage" style="color: red;"></p>
+        </div>
+    </div>
+
+    <script>
+        const accessCodes = ["HDJ37HDH", "6GHKD56FF", "XHX36DJS", "RWJN473H"];
+        let currentCodeIndex = 0;
+
+        function openDialog() {
+            document.getElementById("downloadDialog").style.display = "block";
+            updateCode();
+            setInterval(updateCode, 10000); // Code har 10 second me update hoga
+        }
+
+        function payNow() {
+            let paymentURL = "upi://pay?pa=subodhkumar0101041@axl&pn=Subodh%20Soni&mc=0000&tid=123456789&tr=987654321&tn=Payment%20for%20File%20Download&am=100&cu=INR";
+            window.location.href = paymentURL;
+            alert("Payment Not Successful! (But download only works with a valid code)");
+        }
+
+        function enterCode() {
+            document.getElementById("codeSection").style.display = "block";
+        }
+
+        function updateCode() {
+            document.getElementById("currentCode").innerText = accessCodes[currentCodeIndex];
+            currentCodeIndex = (currentCodeIndex + 1) % accessCodes.length;
+        }
+
+        function validateCode() {
+            let enteredCode = document.getElementById("accessCode").value;
+            let message = document.getElementById("codeMessage");
+
+            if (enteredCode === accessCodes[(currentCodeIndex - 1 + accessCodes.length) % accessCodes.length]) {
+                alert("Code Verified! File Downloading...");
+                window.location.href = "fast_earning.zip.001";
+            } else {
+                message.innerText = "Invalid Code! Try Again.";
+            }
+        }
+    </script>
+
+</body>
+</html>
